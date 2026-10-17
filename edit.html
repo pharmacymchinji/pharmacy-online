@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head><title>Edit</title>
+<style>
+body { font-family: Arial; background: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; }
+.card { background: white; padding: 30px; border-radius: 10px; width: 400px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+input { width: 100%; padding: 12px; margin: 8px 0 15px 0; font-size: 20px; box-sizing: border-box; }
+button { width: 100%; background: #28a745; color: white; padding: 12px; font-size: 20px; border: none; border-radius: 5px; cursor: pointer; }
+</style>
+</head>
+<body>
+<div class="card">
+<h2>Edit Medicine</h2>
+<form method="POST">
+Type<input type="text" name="type" value="{{ medicine[1] }}" required>
+Box<input type="text" name="box_number" value="{{ medicine[2] }}" required>
+Quantity<input type="number" name="quantity" value="{{ medicine[3] }}" required>
+Price<input type="number" step="0.01" name="price" value="{{ medicine[4] }}" required>
+<button type="submit">Update</button>
+</form>
+<a href="/dashboard">Back</a>
+</div>
+</body>
+</html>

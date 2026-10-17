@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head><title>Sell Medicine</title>
+<style>
+body { font-family: Arial; background: #f0f2f5; display:flex; justify-content:center; align-items:center; height:100vh; }
+.card { background:white; padding:30px; border-radius:10px; width:400px; text-align:center; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+input { width:100%; padding:12px; margin:15px 0; font-size:20px; box-sizing: border-box; }
+button { width:100%; background:#ff9800; color:white; padding:12px; font-size:20px; border:none; border-radius:5px; cursor:pointer; }
+h2 { font-size:24px; }
+p { font-size:20px; }
+</style>
+</head>
+<body>
+<div class="card">
+<h2>Sell: {{ medicine[1] }}</h2>
+<p>Current Stock: <b>{{ medicine[3] }}</b></p>
+<p>Box No: {{ medicine[2] }} | Price: {{ medicine[4] }}</p>
+<form method="POST">
+<label style="font-size:20px;">How many bought?</label>
+<input type="number" name="sell_qty" value="1" min="1" max="{{ medicine[3] }}" required>
+<button type="submit">Confirm Sale & Deduct</button>
+</form>
+<a href="/dashboard" style="display:block; margin-top:15px; font-size:18px;">Cancel</a>
+</div>
+</body>
+</html>

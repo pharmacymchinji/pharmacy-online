@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Medicine Tracking</title>
+<style>
+body { font-family: Arial; background: #f0f2f5; margin: 0; padding: 20px; }
+.container { width: 95%; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+h1 { text-align: center; font-size: 32px; }
+.top-bar { display: flex; justify-content: space-between; align-items: center; margin: 20px 0; position: relative; }
+.btn-add { background: #007bff; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-size: 20px; }
+.search-center { position: absolute; left: 50%; transform: translateX(-50%); display: flex; align-items: center; }
+.search-center input { padding: 10px 15px; font-size: 20px; width: 280px; border: 2px solid #ccc; border-radius: 5px; }
+.search-center button { padding: 10px 18px; font-size: 20px; margin-left: 5px; background: #333; color: white; border: none; border-radius: 5px; cursor: pointer; }
+table { width: 100%; border-collapse: collapse; font-size: 20px; margin-top: 20px; }
+th { background: #3390ff; color: white; padding: 12px; }
+td { padding: 8px; border: 1px solid #ddd; text-align: center; }
+.edit { color: blue; font-weight: bold; text-decoration: none; margin-right: 8px; }
+.delete { color: red; font-weight: bold; text-decoration: none; }
+.sell-form { display: flex; align-items: center; justify-content: center; gap: 5px; }
+.sell-form input { width: 65px; padding: 6px; font-size: 18px; text-align: center; border: 2px solid #ff9800; border-radius: 4px; }
+.sell-form button { background: #ff9800; color: white; border: none; padding: 7px 12px; font-size: 16px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+.qty-low { color: red; font-weight: bold; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Medicine Tracking</h1>
+<div class="top-bar">
+<div>
+<a href="/add" class="btn-add">+ Add Medicine</a>
+<a href="/sales" style="background:#28a745; color:white; padding:12px 20px; text-decoration:none; border-radius:5px; font-size:20px; margin-left:10px;">Sales History</a>
+</div>
+<div class="search-center">
+<form method="GET" style="display:flex;">
+<input type="text" name="search" placeholder="Search by type">
+<button type="submit">Search</button>
+</form>
+</div>
+</div>
+<table>
+<tr><th>ID</th><th>Type</th><th>Box</th><th>Qty Left</th><th>Price</th><th>Sell Now (Type No. + Enter)</th><th>Action</th></tr>
+{% for med in medicines %}
+<tr>
+<td>{{ med[0] }}</td>
+<td>{{ med[1] }}</td>
+<td>{{ med[2] }}</td>
+<td class="{% if med[3] <= 5 %}qty-low{% endif %}">{{ med[3] }}</td>
+<td>{{ med[4] }}</td>
+<td>
+<form action="/sell/{{ med[0] }}" method="POST" class="sell-form">
+<input type="number" name="sell_qty" value="1" min="1" max="{{ med[3] }}" required>
+<button type="submit">OK</button>
+</form>
+</td>
+<td>
+<a href="/edit/{{ med[0] }}" class="edit">Edit</a>
+<a href="/delete/{{ med[0] }}" class="delete">Delete</a>
+</td>
+</tr>
+{% endfor %}
+</table>
+<a href="/logout" style="display:block; text-align:center; margin-top:20px; font-size:18px;">Logout</a>
+</div>
+</body>
+</html>

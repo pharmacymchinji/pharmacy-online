@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head><title>Sales History</title>
+<style>
+body { font-family: Arial; background: #f0f2f5; margin:0; padding:20px; }
+.container { width:90%; margin:auto; background:white; padding:30px; border-radius:10px; }
+h1 { text-align:center; }
+.summary { display:flex; justify-content:space-around; margin:20px 0; }
+.box { background:#007bff; color:white; padding:20px; border-radius:10px; text-align:center; width:40%; font-size:22px; }
+.box2 { background:#28a745; }
+table { width:100%; border-collapse:collapse; font-size:19px; margin-top:20px; }
+th { background:#333; color:white; padding:12px; }
+td { padding:10px; border:1px solid #ddd; text-align:center; }
+.btn { padding:10px 20px; text-decoration:none; border-radius:5px; font-size:18px; display:inline-block; margin:5px; }
+.btn-back { background:#007bff; color:white; }
+.btn-clear { background:#dc3545; color:white; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Sales History</h1>
+<div class="summary">
+<div class="box">Total Items Sold: <b>{{ total_qty }}</b></div>
+<div class="box box2">Total Sales: <b>MK {{ total_amount }}</b></div>
+</div>
+<div style="text-align:center;">
+<a href="/dashboard" class="btn btn-back">Back to Dashboard</a>
+<a href="/clear_sales" class="btn btn-clear" onclick="return confirm('Clear all sales history?')">Clear History</a>
+</div>
+<table>
+<tr><th>ID</th><th>Medicine</th><th>Qty Sold</th><th>Price Each</th><th>Total</th><th>Date & Time</th></tr>
+{% for s in sales %}
+<tr>
+<td>{{ s[0] }}</td>
+<td>{{ s[2] }}</td>
+<td>{{ s[3] }}</td>
+<td>{{ s[4] }}</td>
+<td><b>{{ s[5] }}</b></td>
+<td>{{ s[6] }}</td>
+</tr>
+{% endfor %}
+</table>
+</div>
+</body>
+</html>
